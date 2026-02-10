@@ -10,13 +10,10 @@ Ce projet propose une analyse comparative de modèles d'apprentissage supervisé
 
 L'objectif est de prédire la classe d'un véhicule (`unacc`, `acc`, `good`, `vgood`) ou de recommander son achat (`No`, `Yes`) en fonction de 6 caractéristiques : prix d'achat, coût d'entretien, nombre de portes, capacité, taille du coffre et sécurité.
 
-### Méthodologie
-1.  **Prétraitement** : Encodage des variables ordinales (OrdinalEncoder) et gestion des classes déséquilibrées.
-2.  **Modélisation** :
-    * *Decision Tree* (Baseline)
-    * *Random Forest* (Bagging)
-    * *Gradient Boosting* (Boosting)
-3.  **Optimisation** : Recherche d'hyperparamètres pour maximiser le Rappel et l'Accuracy.
+### Contenu du dépôt
+* `Car_Evaluation_Classification.ipynb` : Le notebook Jupyter contenant tout le code (nettoyage, entraînement, visualisations).
+* `car_excel.xlsx` / `car_excel_bis.xlsx` : Les jeux de données utilisés.
+* `car_decision_tree_full.png` : Visualisation de l'arbre de décision complet.
 
 ---
 
@@ -49,7 +46,7 @@ Le défi principal est le fort déséquilibre des classes (479 `No` vs 40 `Yes` 
 
 ### Prérequis
 * Python 3.x
-* Bibliothèques : `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`
+* Jupyter Notebook
 
 ### Instructions
 1.  **Cloner le dépôt** :
@@ -58,14 +55,16 @@ Le défi principal est le fort déséquilibre des classes (479 `No` vs 40 `Yes` 
     cd CarModelAcceptance-Ensemble
     ```
 
-2.  **Installer les dépendances** :
+2.  **Installer les bibliothèques nécessaires** :
     ```bash
-    pip install -r requirements.txt
-    # Ou manuellement : pip install pandas scikit-learn seaborn matplotlib
+    pip install pandas scikit-learn seaborn matplotlib openpyxl
     ```
 
 3.  **Lancer l'analyse** :
-    Ouvrez le notebook Jupyter ou exécutez le script principal pour reproduire les entraînements et visualiser les matrices de confusion.
+    Ouvrez le fichier `Car_Evaluation_Classification.ipynb` dans Jupyter pour exécuter le code et voir les résultats.
+    ```bash
+    jupyter notebook Car_Evaluation_Classification.ipynb
+    ```
 
 ---
 
