@@ -4,41 +4,36 @@
 [![Scikit-Learn](https://img.shields.io/badge/Scikit_Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)]()
 
-Ce projet propose une analyse comparative de modèles d'apprentissage supervisé pour évaluer l'acceptabilité de véhicules (UCI Car Evaluation Dataset). L'étude confronte les **Arbres de Décision** classiques aux méthodes ensemblistes (**Random Forest** et **Gradient Boosting**) sur des tâches de classification multiclasse et binaire.
+Ce projet propose une analyse comparative de modèles d'apprentissage supervisé pour évaluer l'acceptabilité de véhicules (UCI Car Evaluation Dataset). L'étude confronte les **Arbres de Décision** classiques aux méthodes ensemblistes (**Random Forest** et **Gradient Boosting**).
 
-## 📋 Description du Projet
+## 📂 Structure du Dépôt
 
-L'objectif est de prédire la classe d'un véhicule (`unacc`, `acc`, `good`, `vgood`) ou de recommander son achat (`No`, `Yes`) en fonction de 6 caractéristiques : prix d'achat, coût d'entretien, nombre de portes, capacité, taille du coffre et sécurité.
+Voici le contenu détaillé des fichiers du projet :
 
-### Contenu du dépôt
-* `Car_Evaluation_Classification.ipynb` : Le notebook Jupyter contenant tout le code (nettoyage, entraînement, visualisations).
-* `car_excel.xlsx` / `car_excel_bis.xlsx` : Les jeux de données utilisés.
-* `car_decision_tree_full.png` : Visualisation de l'arbre de décision complet.
+* **`Car_Evaluation_Classification.ipynb`** : Le notebook Jupyter principal contenant tout le code (nettoyage des données, entraînement des modèles, visualisations et résultats).
+* **`car_excel.xlsx`** : Le jeu de données original utilisé pour l'entraînement.
+* **`car_excel_bis.xlsx`** : Une version secondaire du jeu de données (sauvegarde ou variante).
+* **`car_decision_tree_full.png`** : Une image haute résolution générée montrant la structure complète de l'arbre de décision entraîné.
+* **`README.md`** : Ce fichier de documentation.
 
 ---
 
 ## 📊 Résultats Clés
 
 ### 1. Classification Multiclasse (4 catégories)
-Le **Gradient Boosting** s'impose comme le modèle le plus performant, surpassant l'arbre de décision et le Random Forest, notamment sur la détection des classes rares.
+Le **Gradient Boosting** surpasse les autres modèles pour la détection des classes rares.
 
 | Modèle | Accuracy Globale | Rappel (`vgood`) | Observation |
 | :--- | :---: | :---: | :--- |
-| **Decision Tree** | ~91.00% | 0.90 | Difficultés à généraliser sur les données complexes. |
-| **Random Forest** | 98.00% | 0.90 | Très robuste, excellente précision globale. |
-| **Gradient Boosting** | **98.84%** | **1.00** | **Meilleur Modèle**. Capture 100% des véhicules "Very Good". |
+| **Decision Tree** | ~91.00% | 0.90 | Baseline, manque de stabilité. |
+| **Random Forest** | 98.00% | 0.90 | Excellente précision globale. |
+| **Gradient Boosting** | **98.84%** | **1.00** | **Meilleur Modèle**. Sans faute sur les meilleures voitures. |
 
 ### 2. Classification Binaire (Recommandation : No / Yes)
-Le défi principal est le fort déséquilibre des classes (479 `No` vs 40 `Yes` dans le jeu de test).
+Sur un jeu de données déséquilibré (479 `No` vs 40 `Yes`) :
 
-* **Random Forest** : Le choix de la **sécurité**.
-    * **Précision : 1.00** (Aucun Faux Positif).
-    * Si ce modèle recommande une voiture, elle est assurément bonne.
-* **Gradient Boosting** : Le choix de la **performance**.
-    * **Accuracy : 95.18%**.
-    * Meilleur compromis pour minimiser les Faux Négatifs (voitures ratées).
-* **Decision Tree** :
-    * Précision faible (**0.44**), générant trop de fausses recommandations.
+* **Random Forest** : **Précision de 1.00**. Il ne recommande que des valeurs sûres (0 Faux Positif).
+* **Gradient Boosting** : **Accuracy de 95.18%**. Il capture davantage de bonnes voitures au prix de quelques erreurs mineures.
 
 ---
 
@@ -46,7 +41,7 @@ Le défi principal est le fort déséquilibre des classes (479 `No` vs 40 `Yes` 
 
 ### Prérequis
 * Python 3.x
-* Jupyter Notebook
+* Jupyter Notebook ou JupyterLab
 
 ### Instructions
 1.  **Cloner le dépôt** :
@@ -55,13 +50,14 @@ Le défi principal est le fort déséquilibre des classes (479 `No` vs 40 `Yes` 
     cd CarModelAcceptance-Ensemble
     ```
 
-2.  **Installer les bibliothèques nécessaires** :
+2.  **Installer les dépendances** :
+    Les bibliothèques suivantes sont nécessaires (visibles dans les imports) :
     ```bash
-    pip install pandas scikit-learn seaborn matplotlib openpyxl
+    pip install pandas scikit-learn seaborn matplotlib openpyxl graphviz
     ```
 
 3.  **Lancer l'analyse** :
-    Ouvrez le fichier `Car_Evaluation_Classification.ipynb` dans Jupyter pour exécuter le code et voir les résultats.
+    Ouvrez le fichier notebook pour exécuter le code :
     ```bash
     jupyter notebook Car_Evaluation_Classification.ipynb
     ```
@@ -70,9 +66,9 @@ Le défi principal est le fort déséquilibre des classes (479 `No` vs 40 `Yes` 
 
 ## 📈 Conclusion
 
-Cette étude démontre la supériorité des méthodes ensemblistes sur ce jeu de données :
-* Utilisez le **Gradient Boosting** si la priorité est de ne manquer aucune opportunité (Rappel maximal).
-* Utilisez le **Random Forest** si la priorité est d'éviter absolument une mauvaise recommandation (Précision maximale).
+Cette étude démontre la supériorité des méthodes ensemblistes :
+* Privilégiez le **Gradient Boosting** pour maximiser la détection des opportunités (Rappel).
+* Privilégiez le **Random Forest** pour une fiabilité absolue dans les recommandations (Précision).
 
 ---
 *Projet réalisé dans le cadre du module d'Apprentissage Supervisé.*
